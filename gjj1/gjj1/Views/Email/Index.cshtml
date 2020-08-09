@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #tj {
+        margin-top: 5%;
+    }
+    </style>
+<div id="tj">
+    邮件主题:<input class="put" type="text" placeholder="请输入您的邮件主题" id='a1' value="" />
+    发送对象:<input class="put" type="text" placeholder="请输入邮件的发送对象" id='a2' value="" />
+    邮件内容:<input class="put" type="text" placeholder="请输入您要发送的内容" id='a3' value="" />
+    <button id="btn1" onclick="getValue()">发送邮件</button>
+
+</div>
+<script>
+    function getValue() {
+        var zhuti = $("#a1").val();
+        var duixiang = $("#a2").val();
+        var neirong = $("#a3").val();
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/Email/SendMail",
+            data: {
+                title: zhuti,
+                email: duixiang,
+                content:neirong
+            },
+            success: function (data) {
+                if (data.status == "0") {
+                    alert("成功");
+                } else {
+                    alert("失败");
+                }
+            }
+        });
+    }
+    //$.ajax({
+    //    type: "POST",
+    //    url: "",
+    //    data: "",
+    //    success: function (msg) {
+    //        alert(msg);
+    //    });
+</script>
+

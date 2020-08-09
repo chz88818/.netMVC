@@ -1,0 +1,216 @@
+﻿@using gjj1.Models;
+@{
+    ViewBag.Title = "Home Page";
+}
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">*@
+
+<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">*@
+
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>*@
+@*<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">*@
+@*<style lang="less" scoped>
+        .login_container {
+            background-color: #2b5487;
+            height: 100%;
+        }
+
+        .login_box {
+            width: 450px;
+            height: 300px;
+            background-color: #fafdff;
+            border-radius: 3px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        .avatar_box {
+            height: 130px;
+            width: 130px;
+            border: 1px solid #eee;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 0 10px #ddd;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background-color: #fff;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #eee;
+        }
+
+
+        .bts {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .login_form {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+    </style>*@
+<style>
+    /*#tbList {
+            border: 1px solid #0094ff;
+            width: 600px;
+            margin: 10px auto;
+            border-collapse: collapse;
+            margin-top:5%;
+        }
+
+            #tbList th, td {
+                border: 1px solid #0094ff;
+                padding: 10px;
+            }*/
+    .add {
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+    }
+    #tj {
+        margin-top: 5%;
+    }
+    /*.btn1 {
+        display: inline-block;
+        width: 80px;
+        border: none 0;
+        padding: 8px 0px;
+        font-size: 16px;
+        font-family: "Microsoft Yahei";
+        background-color: rgb(73, 173, 53);
+        color: white;
+        cursor: pointer;
+        text-align: center;
+    }*/
+</style>
+@*</head>*@
+@*<body class="login_container">*@
+<table class="table table-bordered" id="tj">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+
+    @foreach (Login a in ViewData["DataList"] as List<Login>)
+    {
+        <tr>
+            <td>@a.Id</td>
+            <td>@a.Name</td>
+            <td>@a.cz</td>
+            <td>
+
+                <a href="javascript:del(@a.Id)">删</a>
+                <a href="/home/modify/@a.Id">改（id不可修改）</a>
+            </td>
+        </tr>
+
+    }
+
+</table>
+
+<a href="/home/Add" class="add">添加</a>
+@*<div id="app">
+        <div class="login_box">
+            <!--头像-->
+            <div class="avatar_box">
+                <img src="./img/logo2.jpg" alt="">
+            </div>
+            <!--登录表单-->
+            <el-form label-width="0px" class="login_form">
+                <!--用户名-->
+                <el-form-item>
+                    <el-input prefix-icon="el-icon-user" v-model="username"></el-input>
+                </el-form-item>
+                <!--密码-->
+                <el-form-item>
+                    <el-input type=password prefix-icon="el-icon-lock" v-model="password"></el-input>
+                </el-form-item>
+                <!--按钮-->
+                <el-form-item class="bts">
+                    <el-button type="primary">登录</el-button>
+                    <el-button type="info">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
+        <!-- <p>{{username}}</p> -->
+    </div>*@
+
+@*</body>*@
+
+
+@*</html>*@
+@*<script type="text/javascript">
+        var rm = new Vue({
+            el: '#app',
+            data: {
+
+
+                username: '123',
+                password: '231',
+
+            }
+
+        })
+
+
+    </script>*@
+@*@Html.Hidden("permisson",Session["permission"])*@
+<script>
+    
+    function del(id) {
+        if (confirm("您确定要删除吗？")) {
+            window.location = "/home/del/" + id;
+        }
+    }
+</script>
+@*<div class="jumbotron">
+        <h1>？？？？？？？？？？</h1>
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>*@
+
+@*<div class="row">
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>*@

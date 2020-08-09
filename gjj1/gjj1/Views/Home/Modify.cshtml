@@ -1,0 +1,61 @@
+﻿@model gjj1.Models.Login
+
+@*@{
+    Layout = null;
+}*@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>xiugai</title>
+</head>
+
+<body>
+    @using (Html.BeginForm("modify", "Home", FormMethod.Post))
+    {
+        <table id="tbList">
+            <tr>
+                <td>修改</td>
+            
+            </tr>
+            <tr>
+                <td>id:</td>
+                <td>@Html.TextBoxFor(a => a.Id)</td>
+            </tr>
+
+            <tr>
+                <td>姓名:</td>
+                <td>@Html.TextBoxFor(a => a.Name)</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="确定修改" />@Html.ActionLink("返回","Index","Home")</td>
+                </tr>
+        </table>
+    }
+</body>
+</html>
+<style>
+    #tbList {
+        border: 1px solid #0094ff;
+        width: 400px;
+        margin: 10px auto;
+        border-collapse: collapse;
+    }
+
+        #tbList th, td {
+            border: 1px solid #0094ff;
+            padding: 10px;
+        }
+</style>
+<script>
+    var jss = "@(Session["permission"])";
+$(function () {
+    if (jss == "普通权限") {
+        alert("你没有足够权限访问该页面");
+        // alert(jss);
+        $('#tbList').hide();
+    }
+})
+</script>

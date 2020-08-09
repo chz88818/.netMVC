@@ -1,0 +1,135 @@
+﻿@using gjj1.Models;
+
+<style>
+
+    .add {
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+    }
+
+    #tj {
+        margin-top: 5%;
+    }
+</style>
+
+<table class="table table-bordered" id="tj">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>权限内容</th>
+        <th>操作</th>
+    </tr>
+
+    @foreach (group a in ViewData["DataList"] as List<group>)
+    {
+        <tr>
+            <td>@a.gid</td>
+            <td>@a.gname</td>
+            <td>@a.fid</td>
+            <td>
+
+                <a href="javascript:del(@a.gid)">删</a>
+                <button class="btn btn-primary getid" type="button" id="cid" onclick="openAddModal(this)">修改</button>
+            </td>
+        </tr>
+
+    }
+
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Login/xiugaik">
+                    <table id="tbList">
+                        <tr>
+                            <td>修改</td>
+
+                        </tr>
+                        <tr>
+                            <td>id:</td>
+                            <td><input type="text" id="getid" name="getid"></td>
+                        </tr>
+
+                        <tr>
+                            <td>用户组名:</td>
+                            <td><input type="text" id="getname" name="getgname"></td>
+                        </tr>
+
+
+                    </table>
+                    <div>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox1" value="1" name="a1"> 查看
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox2" value="2" name="a2"> 改
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox3" value="3" name="a3"> 删
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox4" value="4" name="a4"> 增
+                        </label>
+                    </div>
+
+
+                    <input type="submit" value="确定修改" />@Html.ActionLink("返回", "Index", "Home")
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="/home/Add" class="add">添加</a>
+
+<script>
+    function del(id) {
+        if (confirm("您确定要删除吗？")) {
+            window.location = "/home/del/" + id;
+        }
+    }
+    function openAddModal(obj) {
+        $("#myModal1").modal('show');
+        //获取点击行的某一列的值
+        //var stuno = document.getElementById("table").rows[2].cells[0].innerText;
+        //alert(stuno);
+        //获取当前点击行的id
+        var $td = $(obj).parents('tr').children('td');
+        var id = $td.eq(0).text();
+        var name = $td.eq(1).text();
+        console.log(id+name);
+        $("#getid").val(id);//将获取的该行的id值填充到模态框的文框中，文本框的ID为itemmodalid，其他的数据也是如此处理}
+        $("#getname").val(name);//将获取的该行的id值填充到模态框的文框中，文本框的ID为itemmodalid，其他的数据也是如此处理}
+    }
+ var jss = "@(Session["permission"])";
+$(function () {
+    if (jss == "普通权限") {
+        alert("你没有足够权限访问该页面");
+        // alert(jss);
+        $('#tj').hide();
+    }
+})
+</script>
+
+@*filterContext.HttpContext.Session["workcell"] = "workcell1";
+    var jss = "@(Session["workcell"])";
+    $(function () {
+        if (jss == "workcell1") {
+          href
+        }else if(jss == "workcell2"){
+
+    }else if(jss=="workcell3"){
+    }
+    })*@
